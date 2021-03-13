@@ -32,7 +32,7 @@ A dmenu power menu script that I use in any tiling wm. You can only shutdown or 
 
 ## dmenuryzenadj
 
-A dmenu script that uses (ryzenadj)[https://github.com/FlyGoat/RyzenAdj] to lower my Ryzen laptop processor speed so that it doesn't go hot. Only good if you have **Ryzen 5 3550H**, any other cpu could die using these settings.
+A dmenu script that uses [ryzenadj](https://github.com/FlyGoat/RyzenAdj) to lower my Ryzen laptop processor speed so that it doesn't go hot. Only good if you have **Ryzen 5 3550H**, any other cpu could die using these settings.
 
 ## dmenuscreenshot
 
