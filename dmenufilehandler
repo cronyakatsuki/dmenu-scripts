@@ -4,4 +4,34 @@
 # and it will list all your files and open them
 # in your prefered program with xdg-open
 
-find "$1" | dmenu -l 30 | xargs -I {} xdg-open "{}"
+
+# cd into the given directory
+cd $1
+
+
+# a functions that list all everything in a directory and gives back the chosen one
+choice (){
+(ls -1 -a | dmenu -l 30 -p "Choose your file!")
+}
+
+# first choice
+dir=$(choice)
+
+# while the coice is not a file do what is inside
+while [ ! -f "$dir" ]
+do
+    # first we check if it is a single dot and if it is we exit
+    [ "$dir" = "." ] && exit
+
+    # if dir is empty we exit
+    [ -z "$dir" ] && exit
+    
+    # if all check are negative we change into the directory
+    cd "$dir"
+    
+    # doing a new check
+    dir=$(choice)
+done
+
+# open the file using xdg-open
+xdg-open "$dir"
