@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# A script that uses my other project to list games and allows me to run them
+
+game_run | dmenu -l 20 -p "Choose what game to launch" | xargs -I {} game_run {}
