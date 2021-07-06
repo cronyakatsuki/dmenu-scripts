@@ -34,4 +34,5 @@ do
 done
 
 # open the file using xdg-open
+quick-notify "Opening file" "$dir"
 xdg-open "$dir"
