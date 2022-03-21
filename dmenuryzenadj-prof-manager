@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# A script to run my game specifiy ryzenadj scripts
+
+
+# cd into the given directory
+cd $1
+
+profile=$(ls -1 -A | dmenu -l 30 -p "Choose your file!")
+
+[ -n "$profile" ] || exit
+
+quick-notify "Loading profile" "$profile"
+./$profile

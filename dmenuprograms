@@ -1,0 +1,16 @@
+#!/bin/bash
+
+declare -a software=(
+"bitwarden-desktop"
+"obs"
+"godot"
+"megasync"
+"spotify"
+"discord"
+)
+
+choice=$(printf "%s\n" "${software[@]}" | dmenu -p "Choose software to run")
+
+[ -n $choice ] || exit
+
+$choice

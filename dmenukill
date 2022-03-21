@@ -1,0 +1,13 @@
+#!/bin/sh
+
+selected=$(ps --user "$USER" -F | dmenu -p "Select procces to kill:" -l 5 | awk '{print $2" "$11}')
+
+[ -n "$selected" ] || exit
+
+answer=$(printf "yes\\nno" | dmenu -p "Are you sure?")
+
+[ $answer = "yes" ] || exit
+
+kill -9 "${selected%% *}"
+
+quick-notify "Killed Procces" "$selected"

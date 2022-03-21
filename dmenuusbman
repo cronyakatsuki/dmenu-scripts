@@ -1,0 +1,47 @@
+#!/bin/sh
+
+driveCount(){
+    count="$(echo "$1" | wc -l)"
+}
+
+mount(){
+    mountable="$(lsblk -lp | awk '/^\/dev\/sd.*part $/ { print $1 " ("$4")" }')"
+
+    if [ "$mountable" = "" ]; then
+        quick-notify "Dmenu Usb Manager" "No drives to mount"
+        exit
+    fi
+
+    chosen="$(printf '%s' "$mountable" | dmenu -p "Drive to mount?")"
+
+    if [ -n "$chosen" ];then
+        udisksctl mount -b "${chosen%% *}"
+    else
+        quick-notify "Dmenu Usb Manager" "No drives chosen to mount" 
+        exit
+    fi
+
+}
+
+unmount(){
+    mounted="$(lsblk -lp | awk '/run/ { print $1 " ("$4")" }')"
+    
+    if [ "$mounted" = "" ]; then
+        quick-notify "Dmenu Usb Manager" "No drives to unmount"
+        exit
+    fi
+
+    chosen="$(printf '%s' "$mounted" | dmenu -p "Drive to unmount?")"
+
+    if [ -n "$chosen" ];then
+        udisksctl unmount -b "${chosen%% *}"
+    else
+        quick-notify "Dmenu Usb Manager" "No drives chosen to unmount" 
+        exit
+    fi
+}
+
+case $(printf "mount\\nunmount" | dmenu -p "Chose your usb action") in
+    "mount") mount ;;
+    "unmount") unmount ;;
+esac

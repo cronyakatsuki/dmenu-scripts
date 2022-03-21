@@ -1,17 +1,18 @@
 #!/bin/sh
 
-current_temp=$(sudo ryzenadj -i | grep 'tctl-temp' | awk '{ print $6 }')
-slow_time=$(sudo ryzenadj -i | grep 'slow-time' | awk '{ print $4 }')
+current_temp=$(sudo /bin/ryzenadj -i | grep 'tctl-temp' | awk '{ print $6 }')
+slow_time=$(sudo /bin/ryzenadj -i | grep 'slow-time' | awk '{ print $4 }')
 
-[ "$current_temp" = "70.000" ] & [ "$slow_time" = "60.000" ] && current_mode="heavy gaming" || current_mode="fluff mode"
 [ "$current_temp" = "60.000" ] && current_mode="normal mode"
 [ "$current_temp" = "65.000" ] && current_mode="light gaming"
-[ "$current_temp" = "75.000" ] && current_mode="super heavy programs"
+[ "$current_temp" = "70.000" ] && current_mode="heavy gaming"
+[ "$current_temp" = "75.000" ] && current_mode="heavy programs"
+[ "$current_temp" = "85.000" ] && current_mode="heavy gaming pro"
 
-case "$(printf "normal mode\\nfluff mode\\nlight gaming\\nheavy gaming\\nsuper heavy programs" | dmenu -p "Current: $current_mode")" in
-	"normal mode") sudo ryzenadj --slow-time=30 --vrmmax-current=30000 --max-gfxclk=900 --max-fclk-frequency=1200 --tctl-temp=60 --stapm-limit=10000 --stapm-time=300 --fast-limit=12000 --slow-limit=11000; break ;;
-	"fluff mode") sudo ryzenadj --slow-time=30 --vrmmax-current=30000 --max-gfxclk=550 --max-fclk-frequency=1200 --tctl-temp=70 --stapm-limit=5000 --stapm-time=150 --fast-limit=7000 --slow-limit=6000; break ;;
-	"light gaming") sudo ryzenadj --slow-time=30 --vrmmax-current=35000 --max-gfxclk=900 --max-fclk-frequency=1200 --tctl-temp=65 --stapm-limit=10000 --stapm-time=300 --fast-limit=12000 --slow-limit=11000; break ;;
-	"heavy gaming") sudo ryzenadj --slow-time=60 --vrmmax-current=60000 --max-gfxclk=900 --max-fclk-frequency=1200 --tctl-temp=70 --stapm-limit=20000 --stapm-time=1000 --fast-limit=25000 --slow-limit=21000; break ;;
-	"super heavy programs") sudo ryzenadj --slow-time=60 --vrmmax-current=60000 --max-gfxclk=900 --max-fclk-frequency=1200 --tctl-temp=75 --stapm-limit=25000 --stapm-time=1000 --fast-limit=30000 --slow-limit=27000; break ;;
+case "$(printf "normal mode\\nlight gaming\\nheavy gaming\\nheavy programs\\nheavy gaming pro" | dmenu -p "Current: $current_mode")" in
+	"normal mode") sudo ryzenadj --slow-time=30 --vrmmax-current=30000 --tctl-temp=60 --stapm-limit=10000 --stapm-time=300 --fast-limit=12000 --slow-limit=11000 --power-saving; break ;;
+	"light gaming") sudo ryzenadj --slow-time=30 --vrmmax-current=35000 --tctl-temp=65 --stapm-limit=10000 --stapm-time=300 --fast-limit=12000 --slow-limit=11000 --max-performance; break ;;
+	"heavy gaming") sudo ryzenadj --slow-time=60 --vrmmax-current=60000 --tctl-temp=70 --stapm-limit=20000 --stapm-time=1000 --fast-limit=25000 --slow-limit=21000 --max-performance; break ;;
+	"heavy programs") sudo ryzenadj --slow-time=60 --vrmmax-current=60000 --tctl-temp=75 --stapm-limit=25000 --stapm-time=1000 --fast-limit=30000 --slow-limit=27000 --max-performance; break ;;
+  "heavy gaming pro") sudo ryzenadj --slow-time=60 --vrmmax-current=70000 --tctl-temp=85 --stapm-limit=35000 --stapm-time=1000 --fast-limit=50000 --slow-limit=48000 --max-performance; break ;;
 esac

@@ -1,5 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
-# A script that uses my other project to list games and allows me to run them
+declare -a Games=(
+    "Heroic (Launcher)"
+    "Lutris (Launcher)"
+)
 
-game_run | dmenu -l 20 -p "Choose what game to launch" | xargs -I {} game_run {}
+case "$(printf "%s\n" "${Games[@]}" | dmenu -p "Choose your game")" in
+	  "Heroic (Launcher)") heroic ;;
+    "Lutris (Launcher)") lutris ;;
+esac
