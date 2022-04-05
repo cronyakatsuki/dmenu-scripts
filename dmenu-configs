@@ -1,0 +1,35 @@
+#!/bin/env bash
+
+# a script to quickly open up one of my many configs
+
+editor="$TERMINAL -e $EDITOR"
+
+declare -a configs=(
+    "Quit"
+    "alacritty - $HOME/.config/alacritty/alacritty.yml"
+    "bspwm - $HOME/.config/bspwm/bspwmrc"
+    "bspwm autostart - $HOME/Bin/bspwm/autorun.sh"
+    "dunst - $HOME/.config/dunst/dunstrc"
+    "lf - $HOME/.config/lf/lfrc"
+    "sxhkd - $HOME/.config/sxhkd/sxhkdrc"
+    "neovim - $HOME/.config/nvim/init.lua"
+    "newsboat config - $HOME/.newsboat/config"
+    "newsboat urls - $HOME/.newsboat/urls"
+    "picom - $HOME/.config/picom/picom.conf"
+    "polybar - $HOME/.config/polybar/config.ini"
+    "zathura - $HOME/.config/zathura/zathurarc"
+    "zsh aliases - $HOME/.aliasrc"
+    "zprofile - $HOME/.zprofile"
+    "zshenv - $HOME/.zshenv"
+    "zshrc - $HOME/.zshenv"
+    "xinitrc - $HOME/.xinitrc"
+)
+
+choice=$(printf '%s\n' "${configs[@]}" | dmenu -l 10 -p 'Edit config:')
+
+[ -z "$choice" ] && exit
+
+[ "$choice" = "Quit" ] && exit
+
+cfg=$(printf '%s\n' "${choice}" | awk '{print $NF}')
+$editor "$cfg"
