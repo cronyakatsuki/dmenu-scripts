@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# script to download a file from that has it's link in clipboard
+
+# a functions that list all everything in a directory and gives back the chosen one
+choice (){
+    (ls -1 -a | dmenu -l 30 -p "Choose where to download")
+}
+
+# first choice
+dir=$(choice)
+
+# while the coice is not a file do what is inside
+while [ "$dir" != "Here" ]
+do
+    # first we check if it is a single dot and if it we download there
+    [ "$dir" = "." ] && break
+
+    # if dir is empty we exit
+    [ -z "$dir" ] && exit
+
+    # if all checks are negative we change into the directory
+    cd "$dir"
+
+    # doing a new check
+    dir=$(choice)
+done
+
+# download the file
+quick-notify "Dmenu downloader" "Started downloading a file"
+aria2c -j 16 -s 16 -x 16 -k 5M --file-allocation=none "$(xclip -o)"
+quick-notify "Dmenu downloader" "Downloading finished"

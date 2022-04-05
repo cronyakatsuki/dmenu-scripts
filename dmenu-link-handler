@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Feed this script a link or it will get it from your clipboard and it will give dmenu
+# with some choice of programs to open the link with.
+
+[ -z "$@" ] && link=$(xclip -o) || link="$@" 
+
+case "$(printf "mpv\\nbrowser\\ncopy url\\nw3m" | dmenu -p "Open link with what program?")" in
+    mpv) "$VIDEO" "$link" ;;
+    browser) "$BROWSER" "$link" > /dev/null;;
+    "copy url") echo "$link" | xclip -selection clipboard ;;
+    w3m) readable "$link" | w3m -T text/html ;;
+esac

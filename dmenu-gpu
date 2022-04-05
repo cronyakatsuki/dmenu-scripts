@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# a simple "gui" for envycontrol
+
 already_in()
 {
     quick-notify "Gpu Manager" "Already in $new_mode mode"
@@ -15,9 +17,9 @@ switch()
 }
 
 case "$(printf "integrated\\nhybrid\\nnvidia" | dmenu -p "Choose gpu mode")" in
-	"integrated") new_mode="integrated";;
-	"nvidia") new_mode="nvidia";;
-  "hybrid") new_mode="hybrid";;
+    "integrated") new_mode="integrated";;
+    "nvidia") new_mode="nvidia";;
+    "hybrid") new_mode="hybrid";;
 esac
 
 current_mode=$(envycontrol.py --status | awk '{ print $5 }')

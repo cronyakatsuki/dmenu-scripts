@@ -8,10 +8,9 @@
 # cd into the given directory
 cd $1
 
-
 # a functions that list all everything in a directory and gives back the chosen one
 choice (){
-(ls -1 -a | dmenu -l 30 -p "Choose your file!")
+    (ls -1 -a | dmenu -l 30 -p "Choose your file!")
 }
 
 # first choice
@@ -25,14 +24,14 @@ do
 
     # if dir is empty we exit
     [ -z "$dir" ] && exit
-    
+
     # if all check are negative we change into the directory
     cd "$dir"
-    
+
     # doing a new check
     dir=$(choice)
 done
 
 # open the file using xdg-open
-quick-notify "Opening file" "$dir"
 xdg-open "$dir"
+quick-notify "Opening file" "$dir"

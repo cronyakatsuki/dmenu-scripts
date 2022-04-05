@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# a simple dmenu usb managment script
+
 driveCount(){
     count="$(echo "$1" | wc -l)"
 }

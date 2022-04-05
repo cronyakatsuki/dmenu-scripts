@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# simple power menu script
+
+case "$(printf "shutdown\\nreboot" | dmenu -p "Choose your poison")" in
+    "shutdown") systemctl poweroff ;;
+    "reboot") systemctl reboot ;;
+esac

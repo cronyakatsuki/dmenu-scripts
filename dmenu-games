@@ -1,11 +1,13 @@
 #!/bin/bash
 
+# dmenu script to open up my games or game launcher's
+
 declare -a Games=(
     "Heroic (Launcher)"
     "Lutris (Launcher)"
 )
 
 case "$(printf "%s\n" "${Games[@]}" | dmenu -p "Choose your game")" in
-	  "Heroic (Launcher)") heroic ;;
+    "Heroic (Launcher)") heroic ;;
     "Lutris (Launcher)") lutris ;;
 esac
