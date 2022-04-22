@@ -10,6 +10,8 @@ declare -a configs=(
     "bspwm - $HOME/.config/bspwm/bspwmrc"
     "bspwm autostart - $HOME/Bin/bspwm/autorun.sh"
     "dunst - $HOME/.config/dunst/dunstrc"
+    "game-run - $HOME/.config/game-run/config.ini"
+    "kitty - $HOME/.config/kitty/kitty.conf"
     "lf - $HOME/.config/lf/lfrc"
     "sxhkd - $HOME/.config/sxhkd/sxhkdrc"
     "neovim - $HOME/.config/nvim/init.lua"
@@ -23,6 +25,7 @@ declare -a configs=(
     "zshenv - $HOME/.zshenv"
     "zshrc - $HOME/.zshenv"
     "xinitrc - $HOME/.xinitrc"
+    "qtile - $HOME/.config/qtile/config.py"
 )
 
 choice=$(printf '%s\n' "${configs[@]}" | dmenu -l 10 -p 'Edit config:')

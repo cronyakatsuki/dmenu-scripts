@@ -3,7 +3,7 @@
 # a simple dmenu usb managment script
 
 driveCount(){
-    count="$(echo "$1" | wc -l)"
+    count="$(printf '%s\n' "$1" | wc -l)"
 }
 
 mount(){
@@ -18,6 +18,7 @@ mount(){
 
     if [ -n "$chosen" ];then
         udisksctl mount -b "${chosen%% *}"
+        quick-notify "Dmenu Usb Manager" "Drive ${chosen%% *} mounted"
     else
         quick-notify "Dmenu Usb Manager" "No drives chosen to mount" 
         exit
@@ -33,10 +34,11 @@ unmount(){
         exit
     fi
 
-    chosen="$(printf '%s' "$mounted" | dmenu -p "Drive to unmount?")"
+    chosen="$(printf "$mounted" | dmenu -p "Drive to unmount?")"
 
     if [ -n "$chosen" ];then
         udisksctl unmount -b "${chosen%% *}"
+        quick-notify "Dmenu Usb Manager" "Drive ${chosen%% *} unmounted"
     else
         quick-notify "Dmenu Usb Manager" "No drives chosen to unmount" 
         exit
