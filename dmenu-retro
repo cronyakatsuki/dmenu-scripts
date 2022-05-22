@@ -1,0 +1,129 @@
+#!/bin/bash
+
+# script to run roms from different systems in their respective emulators
+
+# a functions that list all everything in a directory and gives back the chosen one
+choice (){
+    (ls -1 | dmenu -l 30 -p "Choose your $system rom!")
+}
+
+run_rom (){
+    # cd into the given directory
+    cd "$dir"
+
+    # first choice
+    rom=$(choice)
+
+    # first we check if it is a single dot and if it is we exit
+    [ "$rom" = "." ] && exit 1
+
+    # if rom is empty we exit
+    [ -z "$rom" ] && exit 1
+
+    # run the emulator with the chosen rom
+    gamemoderun mangohud --dlsym $emulator "$dir$rom"
+    disown $@
+}
+
+declare -a systems=(
+    "Nintendo - Nintendo Entertainment System (1983-2003)"
+    "Sega - Mega Drive - Genesis (1988–1997)"
+    "Nintendo - Game Boy (1989-2003)"
+    "Nintendo - Super Nintendo Entertainment System (1990-2003)"
+    "Sony Playstation (1994–2006)"
+    "Nintendo - Nintendo 64 (1996-2002)"
+    "Nintendo - Game Boy Color (1998-2003)"
+    "Sony Playstation 2 (2000–2013)"
+    "Nintendo - Game Boy Advance (2001-2009)"
+    "Nintendo Gamecube (2001-2009)"
+    "Sony Playstation Portable (2004–2014)"
+    "Nintendo DS (2004-2015)"
+)
+
+
+case "$(printf  '%s\n' "${systems[@]}" | dmenu -l 10 -p "Chose retro console:")" in
+    "Nintendo - Nintendo Entertainment System (1983-2003)")
+        emulator="fceux"
+        system="NES"
+        dir="$HOME/Roms/Nintendo - Nintendo Entertainment System/"
+        run_rom
+        exit
+        ;;
+    "Nintendo - Nintendo 64 (1996-2002)")
+        emulator="mupen64plus-gui"
+        system="N64"
+        dir="$HOME/Roms/Nintendo - Nintendo 64/"
+        run_rom
+        exit
+        ;;
+    "Nintendo - Game Boy Advance (2001-2009)")
+        emulator="mgba-qt"
+        system="GBA"
+        dir="$HOME/Roms/Nintendo - Game Boy Advance/"
+        run_rom
+        exit
+        ;;
+    "Nintendo Gamecube (2001-2009)")
+        emulator="dolphin-emu"
+        system="Gamecube"
+        dir="$HOME/Roms/Nintendo Gamecube/"
+        run_rom
+        exit
+        ;;
+    "Sony Playstation Portable (2004–2014)")
+        emulator="PPSSPPSDL"
+        system="PSP"
+        dir="$HOME/Roms/Sony Playstation Portable/"
+        run_rom
+        exit
+        ;;
+    "Sony Playstation 2 (2000–2013)")
+        emulator="pcsx2"
+        system="PS2"
+        dir="$HOME/Roms/Sony Playstation 2/"
+        run_rom
+        exit
+        ;;
+    "Sega - Mega Drive - Genesis (1988–1997)")
+        emulator="kega-fusion"
+        system="Genesis"
+        dir="$HOME/Roms/Sega - Mega Drive - Genesis/"
+        run_rom
+        exit
+        ;;
+    "Nintendo - Game Boy (1989-2003)")
+        emulator="mgba-qt"
+        system="GameBoy"
+        dir="$HOME/Roms/Nintendo - Game Boy/"
+        run_rom
+        exit
+        ;;
+    "Nintendo - Game Boy Color (1998-2003)")
+        emulator="mgba-qt"
+        system="GBC"
+        dir="$HOME/Roms/Nintendo - Game Boy Color/"
+        run_rom
+        exit
+        ;;
+    "Nintendo - Super Nintendo Entertainment System (1990-2003)")
+        emulator="snes9x-gtk"
+        system="SNES"
+        dir="$HOME/Roms/Nintendo - Super Nintendo Entertainment System/"
+        run_rom
+        exit
+        ;;
+    "Sony Playstation (1994–2006)")
+        emulator="duckstation-nogui"
+        system="PSX"
+        dir="$HOME/Roms/Sony Playstation/"
+        run_rom
+        exit
+        ;;
+    "Nintendo DS (2004-2015)")
+        emulator="melonDS"
+        system="NDS"
+        dir="$HOME/Roms/Nintendo DS/"
+        run_rom
+        exit
+        ;;
+esac
