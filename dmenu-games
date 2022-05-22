@@ -2,6 +2,19 @@
 
 # dmenu script to open up my games
 
-choice=$(game-run | dmenu -p "Choose game to run:")
+list=$( game-run --list categories | dmenu -p "Choose game category:")
 
-game-run "$choice"
+[ -z "$list" ] && exit 0
+
+if  [ -z "$1" ]; then
+    game=$(game-run --list $list | sed '/-18+/d' | dmenu -p "Choose game to run:")
+elif [ "$1" = "-a" ]; then 
+    game=$(game-run --list $list | dmenu -p "Choose game to run:")
+else
+    printf '%s\n' "Option $1 doesn't exit!!"
+    exit 1
+fi
+
+[ -z "$game" ] && exit 0
+
+game-run "$game"
