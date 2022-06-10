@@ -12,7 +12,7 @@ slow_time=$(sudo /bin/ryzenadj -i | grep 'slow-time' | awk '{ print $4 }')
 [ "$current_temp" = "85.000" ] && current_mode="heavy gaming pro"
 
 case "$(printf "normal mode\\nlight gaming\\nheavy gaming\\nheavy programs\\nheavy gaming pro" | dmenu -p "Current: $current_mode")" in
-    "normal mode") sudo ryzenadj --slow-time=30 --vrmmax-current=30000 --tctl-temp=60 --stapm-limit=10000 --stapm-time=300 --fast-limit=12000 --slow-limit=11000 --power-saving; break ;;
+    "normal mode") sudo ryzenadj --slow-time=30 --vrmmax-current=30000 --tctl-temp=60 --stapm-limit=10000 --stapm-time=300 --fast-limit=12000 --slow-limit=11000 --max-performance; break ;;
     "light gaming") sudo ryzenadj --slow-time=30 --vrmmax-current=35000 --tctl-temp=65 --stapm-limit=10000 --stapm-time=300 --fast-limit=12000 --slow-limit=11000 --max-performance; break ;;
     "heavy gaming") sudo ryzenadj --slow-time=60 --vrmmax-current=60000 --tctl-temp=70 --stapm-limit=20000 --stapm-time=1000 --fast-limit=25000 --slow-limit=21000 --max-performance; break ;;
     "heavy programs") sudo ryzenadj --slow-time=60 --vrmmax-current=60000 --tctl-temp=75 --stapm-limit=25000 --stapm-time=1000 --fast-limit=30000 --slow-limit=27000 --max-performance; break ;;
