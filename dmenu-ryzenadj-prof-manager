@@ -10,4 +10,4 @@ profile=$(ls -1 -A | dmenu -l 30 -p "Choose your file!")
 
 [ -n "$profile" ] || exit
 
-./$profile
+$1/$profile
