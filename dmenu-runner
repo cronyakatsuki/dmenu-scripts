@@ -1,0 +1,5 @@
+#!/bin/sh
+
+choice=$(dmenu_path | grep dmenu- | dmenu -p "Choose script to run:")
+
+$choice
