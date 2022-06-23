@@ -2,8 +2,8 @@
 
 # dmenu script for quickly running specific ryzenadj commands
 
-current_temp=$(sudo /bin/ryzenadj -i | grep 'tctl-temp' | awk '{ print $6 }')
-slow_time=$(sudo /bin/ryzenadj -i | grep 'slow-time' | awk '{ print $4 }')
+current_temp=$(sudo ryzenadj -i | grep 'tctl-temp' | awk '{ print $6 }')
+slow_time=$(sudo ryzenadj -i | grep 'slow-time' | awk '{ print $4 }')
 
 [ "$current_temp" = "60.000" ] && current_mode="normal mode"
 [ "$current_temp" = "65.000" ] && current_mode="light gaming"
