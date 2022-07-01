@@ -3,7 +3,7 @@
 # dmenu script to open up my games
 
 get_category () {
-    category=$( game-run --list categories | dmenu -p "Choose game category:")
+    category=$( game-run list | dmenu -p "Choose game category:")
 
     [ -z "$category" ] && exit 0
 }
@@ -14,9 +14,9 @@ while [ -z "$game" ]
 do
 
     if  [ -z "$1" ]; then
-        game=$(game-run --list $category | sed '/-18+/d' | dmenu -p "Choose game to run:")
+        game=$(game-run list $category | sed '/-18+/d' | dmenu -p "Choose game to run:")
     elif [ "$1" = "-a" ]; then 
-        game=$(game-run --list $category | dmenu -p "Choose game to run:")
+        game=$(game-run list $category | dmenu -p "Choose game to run:")
     else
         printf '%s\n' "Option $1 doesn't exit!!"
         exit 1
@@ -25,7 +25,7 @@ do
     [ -z "$game" ] && get_category
 done
 
-if game-run "$game"; then
+if game-run launch "$game"; then
     quick-notify "Game run" "Launching $game"
 else
     quick-notify "Game run" "Failed to launch $game"
