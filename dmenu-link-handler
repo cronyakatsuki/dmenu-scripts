@@ -3,9 +3,11 @@
 # Feed this script a link or it will get it from your clipboard and it will give dmenu
 # with some choice of programs to open the link with.
 
+source $HOME/.config/dmenu/config
+
 [ -z "$@" ] && link=$(xclip -o) || link="$@" 
 
-case "$(printf "mpv\\nbrowser\\ncopy url\\nw3m" | dmenu -p "Open link with what program?")" in
+case "$(printf "mpv\\nbrowser\\ncopy url\\nw3m" | $DMENU -p "Open link with what program?")" in
     mpv) "$VIDEO" "$link" ;;
     browser) "$BROWSER" "$link" > /dev/null;;
     "copy url") echo "$link" | xclip -selection clipboard ;;
