@@ -2,6 +2,8 @@
 
 # a script to quickly open up one of my many configs
 
+source $HOME/.config/dmenu/config
+
 editor="$TERMINAL -e $EDITOR"
 
 declare -a configs=(
@@ -28,7 +30,7 @@ declare -a configs=(
     "qtile - $HOME/.config/qtile/config.py"
 )
 
-choice=$(printf '%s\n' "${configs[@]}" | dmenu -l 10 -p 'Edit config:')
+choice=$(printf '%s\n' "${configs[@]}" | $DMENU -l 10 -p 'Edit config:')
 
 [ -z "$choice" ] && exit
 

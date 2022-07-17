@@ -4,13 +4,14 @@
 # and it will list all your files and open them
 # in your prefered program with xdg-open
 
+source $HOME/.config/dmenu/config
 
 # cd into the given directory
 cd $1
 
 # a functions that list all everything in a directory and gives back the chosen one
 choice (){
-    (ls -1 -a | dmenu -l 30 -p "Choose your file!")
+    (ls -1 -a | $DMENU -l 30 -p "Choose your file!")
 }
 
 # first choice

@@ -1,5 +1,7 @@
 #!/bin/sh
 
-word="$(printf '\n' | dmenu -p "Enter Word")"
+source $HOME/.config/dmenu/config
 
-dym -c $word | dmenu -p "Select spelling" | xclip -selection clipboard
+word="$(printf '\n' | $DMENU -p "Enter Word")"
+
+dym -c $word | $DMENU -p "Select spelling" | xclip -selection clipboard

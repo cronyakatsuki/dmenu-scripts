@@ -2,6 +2,8 @@
 
 # Search offline copy of the arch wiki
 
+source $HOME/.config/dmenu/config
+
 dir="/usr/share/doc/arch-wiki/html/en/"
 
 docs="$(find $dir -iname "*.html")"
@@ -11,7 +13,7 @@ main () {
         cut -d '/' -f8- | \
         sed -e 's/_/ /g' -e 's/.html//g' | \
         sort | \
-        dmenu -i -l 20 -p "Arch Wiki Docs:")
+        $DMENU -i -l 20 -p "Arch Wiki Docs:")
 
     if [ "$choice" ]; then
         article=$(printf '%s\n' "${dir}${choice}.html" | sed 's/ /_/g')

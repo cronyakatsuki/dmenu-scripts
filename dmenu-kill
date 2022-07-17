@@ -2,11 +2,13 @@
 
 # kill those pesky proceses
 
-selected=$(ps --user "$USER" -F | dmenu -p "Select procces to kill:" -l 5 | awk '{print $2" "$11}')
+source $HOME/.config/dmenu/config
+
+selected=$(ps --user "$USER" -F | $DMENU -p "Select procces to kill:" -l 5 | awk '{print $2" "$11}')
 
 [ -n "$selected" ] || exit
 
-answer=$(printf "yes\\nno" | dmenu -p "Are you sure?")
+answer=$(printf "yes\\nno" | $DMENU -p "Are you sure?")
 
 [ $answer = "yes" ] || exit
 

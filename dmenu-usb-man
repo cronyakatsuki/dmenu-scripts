@@ -2,6 +2,8 @@
 
 # a simple dmenu usb managment script
 
+source $HOME/.config/dmenu/config
+
 driveCount(){
     count="$(printf '%s\n' "$1" | wc -l)"
 }
@@ -10,11 +12,11 @@ mount(){
     mountable="$(lsblk -lp | awk '/^\/dev\/sd.*part $/ { print $1 " ("$4")" }')"
 
     if [ "$mountable" = "" ]; then
-        quick-notify "Dmenu Usb Manager" "No drives to mount"
+        quick-notify "$DMENU Usb Manager" "No drives to mount"
         exit
     fi
 
-    chosen="$(printf '%s' "$mountable" | dmenu -p "Drive to mount?")"
+    chosen="$(printf '%s' "$mountable" | $DMENU -p "Drive to mount?")"
 
     if [ -n "$chosen" ];then
         udisksctl mount -b "${chosen%% *}"
@@ -34,7 +36,7 @@ unmount(){
         exit
     fi
 
-    chosen="$(printf "$mounted" | dmenu -p "Drive to unmount?")"
+    chosen="$(printf "$mounted" | $DMENU -p "Drive to unmount?")"
 
     if [ -n "$chosen" ];then
         udisksctl unmount -b "${chosen%% *}"
@@ -45,7 +47,7 @@ unmount(){
     fi
 }
 
-case $(printf "mount\\nunmount" | dmenu -p "Chose your usb action") in
+case $(printf "mount\\nunmount" | $DMENU -p "Chose your usb action") in
     "mount") mount ;;
     "unmount") unmount ;;
 esac

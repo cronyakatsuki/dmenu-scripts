@@ -3,8 +3,11 @@
 # script to run roms from different systems in their respective emulators
 
 # a functions that list all everything in a directory and gives back the chosen one
+
+source $HOME/.config/dmenu/config
+
 choice (){
-    (ls -1 | dmenu -l 30 -p "Choose your $system rom!")
+    (ls -1 | $DMENU -l 30 -p "Choose your $system rom!")
 }
 
 run_rom (){
@@ -41,7 +44,7 @@ declare -a systems=(
 )
 
 
-case "$(printf  '%s\n' "${systems[@]}" | dmenu -l 10 -p "Chose retro console:")" in
+case "$(printf  '%s\n' "${systems[@]}" | $DMENU -l 10 -p "Chose retro console:")" in
     "Nintendo - Nintendo Entertainment System (1983-2003)")
         emulator="fceux"
         system="NES"

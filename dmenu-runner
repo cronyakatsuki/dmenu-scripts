@@ -1,5 +1,7 @@
 #!/bin/sh
 
-choice=$(dmenu_path | grep dmenu- | dmenu -p "Choose script to run:")
+source $HOME/.config/dmenu/config
+
+choice=$(dmenu_path | grep dmenu- | $DMENU -p "Choose script to run:")
 
 $choice

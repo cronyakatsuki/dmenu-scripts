@@ -1,5 +1,7 @@
 #!/bin/sh
 
+source $HOME/.config/dmenu/config
+
 notAvailable=$(pactl list sinks | grep 'analog-output-headphones' | grep 'not available')
 
 [ ! -z "$notAvailable" ] && quick-notify "Port Master" "Only one port available" && exit
@@ -7,7 +9,7 @@ notAvailable=$(pactl list sinks | grep 'analog-output-headphones' | grep 'not av
 current=$(pactl list sinks | grep 'Active Port' | awk '{ print $3 }')
 [ "$current" = "analog-output-speaker" ] && current="Speakers" || current="Headphones"
 
-case "$(printf "Speakers\\nHeadphones" | dmenu -p "Current: $current ")" in
+case "$(printf "Speakers\\nHeadphones" | $DMENU -p "Current: $current ")" in
     "Speakers") pactl set-sink-port 0 analog-output-speaker ;;
     "Headphones") pactl set-sink-port 0 analog-output-headphones ;;
 esac

@@ -2,6 +2,8 @@
 
 # dmenu script to run one of my most runned programs
 
+source $HOME/.config/dmenu/config
+
 declare -a software=(
     "bitwarden-desktop"
     "megasync"
@@ -9,7 +11,7 @@ declare -a software=(
     "discord"
 )
 
-choice=$(printf "%s\n" "${software[@]}" | dmenu -p "Choose software to run")
+choice=$(printf "%s\n" "${software[@]}" | $DMENU -p "Choose software to run")
 
 [ -n $choice ] || exit
 

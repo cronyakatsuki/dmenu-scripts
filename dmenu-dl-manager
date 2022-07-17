@@ -2,9 +2,11 @@
 
 # script to download a file from that has it's link in clipboard
 
+source $HOME/.config/dmenu/config
+
 # a functions that list all everything in a directory and gives back the chosen one
 choice (){
-    (ls -1 -a | dmenu -l 30 -p "Choose where to download")
+    (ls -1 -a | $DMENU -l 30 -p "Choose where to download")
 }
 
 # first choice

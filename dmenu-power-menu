@@ -2,7 +2,9 @@
 
 # simple power menu script
 
-case "$(printf "shutdown\\nreboot" | dmenu -p "Choose your poison")" in
+source $HOME/.config/dmenu/config
+
+case "$(printf "shutdown\\nreboot" | $DMENU -p "Choose your poison")" in
     "shutdown") sudo poweroff ;;
     "reboot") sudo reboot ;;
 esac

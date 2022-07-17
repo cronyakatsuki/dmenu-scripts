@@ -3,6 +3,8 @@
 # script to run a menu prompt when having more than 2 players since
 # playerctl is bad at managing more than one player at the same time
 
+source $HOME/.config/dmenu/config
+
 command="$@"
 instances=$(playerctl -l | wc -l)
 
@@ -11,6 +13,6 @@ if [ "$instances" = "0" ]; then
 elif [ "$instances" -lt "2" ]; then
     playerctl $command
 else
-    choice=$(playerctl -l | dmenu -p 'Manage:')
+    choice=$(playerctl -l | $DMENU -p 'Manage:')
     playerctl -p $choice $command
 fi

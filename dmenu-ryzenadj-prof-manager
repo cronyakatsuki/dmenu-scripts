@@ -2,11 +2,12 @@
 
 # A script to run my game specifiy ryzenadj scripts
 
+source $HOME/.config/dmenu/config
 
 # cd into the given directory
 cd $1
 
-profile=$(ls -1 -A | dmenu -l 30 -p "Choose your file!")
+profile=$(ls -1 -A | $DMENU -l 5 -p "Choose your file!")
 
 [ -n "$profile" ] || exit
 
